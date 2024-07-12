@@ -1,2 +1,2 @@
 web: bundle exec rails server -p $PORT
-release: bundle.exec rails db:{drop,create,migrate,seed}
+release: bundle exec rspec rails db:{drop,create,migrate,seed}
