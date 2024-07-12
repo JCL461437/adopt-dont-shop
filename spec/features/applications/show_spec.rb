@@ -37,11 +37,11 @@ RSpec.describe "the applications show" do
       it "will display " do
         visit "/applications/#{@application1.id}"
 
-        expect(page).to have_content("#{@application1.name}")
-        expect(page).to have_content("#{@application1.street_address}, #{@application1.city}, #{@application1.state}, #{@application1.zip_code}")
-        expect(page).to have_content("#{@application1.description}")
-        expect(page).to have_content("#{@application1.pets}")
-        expect(page).to have_content("#{@application1.status}")
+        expect(page).to have_content("Applicant: #{@application1.name}")
+        expect(page).to have_content("Address: #{@application1.street_address}, #{@application1.city}, #{@application1.state}, #{@application1.zip_code}")
+        expect(page).to have_content("Description: #{@application1.description}")
+        expect(page).to have_content("Pets: Scooby") # why does the string interpolation not work and return Pets: Pet
+        expect(page).to have_content("Status: #{@application1.status}")
       end
     end
   end
