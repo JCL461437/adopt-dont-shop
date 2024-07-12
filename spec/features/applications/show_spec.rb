@@ -24,22 +24,26 @@ RSpec.describe "the applications show" do
     @pet3 = Pet.create(name: "Gunther", age: 10, breed: "Rottweiler", adoptable: true, shelter_id: shelter.id)
     @pet4 = Pet.create(name: "Carl", age: 7, breed: "Goat", adoptable: false, shelter_id: shelter.id)
 
-    @application1 = Application.create(name: "Joe Baeza", street_address: "12345 Joe Street", city: "Irvine", state: "CA", zip_code: "54321", description: "I like Scooby so I want to adopt him", status: "Pending")
-    @application2 = Application.create(name: "Billy Bob", street_address: "56789 The Bob Street", city: "Boulder", state: "CO", zip_code: "09876", description: "Dozer looks badass and I am a guy who wants a badass dog.", status: "Pending")
-  end
-  
-  it "shows the shelter and all it's attributes" do
-
-    visit "/pets/#{pet.id}"
-
-    expect(page).to have_content(pet.name)
-    expect(page).to have_content(pet.age)
-    expect(page).to have_content(pet.adoptable)
-    expect(page).to have_content(pet.breed)
-    expect(page).to have_content(pet.shelter_name)
+    @application1 = Application.create(name: "Joe Baeza", street_address: "12345 Joe Street", city: "Irvine", state: "CA", zip_code: "54321", description: "I like Scooby and Carl so I want to adopt them", status: "Pending", pet: @pet1, @pet4)
+    @application2 = Application.create(name: "Billy Bob", street_address: "56789 The Bob Street", city: "Boulder", state: "CO", zip_code: "09876", description: "Dozer looks badass and I am a guy who wants a badass dog.", status: "Pending", pet: @pet2)
   end
 
-  xit "" do
+  describe "As a visitor do"
+    describe "when I visit an applications show page" do 
+      it "shows a specific application and all it's attributes" do
 
+        visit "/applications/#{@application1.id}"
+
+        expect(page).to have_content("#{@application1.name}")
+        expect(page).to have_content("#{@application1.street_address}, #{@application1.city}, #{@application1.state}, #{@application1.zip_code}")
+        expect(page).to have_content("#{@application1.description}")
+        expect(page).to have_content("#{@application1.@pet1}")
+        expect(page).to have_content("#{@application1.@pet4}")
+        expect(page).to have_content("#{@application1.status}")
+      end
+
+      xit "" do
+      end 
+    end
   end
 end
