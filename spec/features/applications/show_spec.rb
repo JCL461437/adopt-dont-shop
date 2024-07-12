@@ -24,20 +24,23 @@ RSpec.describe "the applications show" do
     @pet3 = Pet.create!(name: "Gunther", age: 10, breed: "Rottweiler", adoptable: true, shelter_id: @shelter3.id)
     @pet4 = Pet.create!(name: "Carl", age: 7, breed: "Goat", adoptable: false, shelter_id: @shelter4.id)
 
-    @application1 = Application.create!(name: "Joe Baeza", street_address: "12345 Joe Street", city: "Irvine", state: "CA", zip_code: "54321", description: "I like Scooby and Carl so I want to adopt them", status: "Pending", pets: @pet1)
-    @application2 = Application.create!(name: "Billy Bob", street_address: "56789 The Bob Street", city: "Boulder", state: "CO", zip_code: "09876", description: "Dozer looks badass and I am a guy who wants a badass dog.", status: "Pending", pets: @pet2)
+    @application1 = Application.create!(name: "Joe Baeza", street_address: "12345 Joe Street", city: "Irvine", state: "CA", zip_code: "54321",
+                                        description: "I like Scooby and Carl so I want to adopt them", status: "Pending")
+    @application2 = Application.create!(name: "Billy Bob", street_address: "56789 The Bob Street", city: "Boulder", state: "CO", zip_code: "09876",
+                                        description: "Dozer looks badass and I am a guy who wants a badass dog.", status: "Pending")
+
+    @pet_application1 = PetApplication.create!(application: @application1, pet: @pet1)
   end
 
   describe "As a visitor do" do
     describe "when I visit an applications show page" do 
-      it "shows a specific application and all it's attributes" do
-
+      it "will display " do
         visit "/applications/#{@application1.id}"
 
         expect(page).to have_content("#{@application1.name}")
         expect(page).to have_content("#{@application1.street_address}, #{@application1.city}, #{@application1.state}, #{@application1.zip_code}")
         expect(page).to have_content("#{@application1.description}")
-        expect(page).to have_content("#{@application1.pets.name}")
+        expect(page).to have_content("#{@application1.pets}")
         expect(page).to have_content("#{@application1.status}")
       end
     end
