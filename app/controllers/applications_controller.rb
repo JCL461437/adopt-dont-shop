@@ -8,9 +8,15 @@ class ApplicationsController < ApplicationController
   end
 
   def create
-    application = Application.create({id: params[:id], name: params[:name], street_address: params[:street_address], city: params[:city], state: params[:state], zip_code: params[:zip_code], description: params[:description], status: 'In Progress'})
+    application = Application.new({id: params[:id], name: params[:name], street_address: params[:street_address], city: params[:city], state: params[:state], zip_code: params[:zip_code], description: params[:description], status: 'In Progress'})
     
-    redirect_to "/applications/#{application.id}"
+    if application.save
+      redirect_to "/applications/#{application.id}"
+    else 
+      redirect_to "/applications/new"
+      flash[:alert] = "You must fill out all the fields for the Application Form. Try Again"
+    end
+
   end
 
   private 
