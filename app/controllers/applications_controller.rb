@@ -8,14 +8,14 @@ class ApplicationsController < ApplicationController
   end
 
   def create
-    @application = Application.create(new_app)
+    application = Application.create({id: params[:id], name: params[:name], street_address: params[:street_address], city: params[:city], state: params[:state], zip_code: params[:zip_code], description: params[:description], status: 'In Progress'})
     
-    redirect_to "application/#{@application.id}"
+    redirect_to "/applications/#{application.id}"
   end
 
   private 
   
-  def application_params 
-    params.permit(params[:name], params[:street_address], params[:city], params[:state], params[:zip_code], params[:description])
-  end
+  # def application_params 
+  #   params.permit(params[:id], params[:name], params[:street_address], params[:city], params[:state], params[:zip_code], params[:description])
+  # end
 end
