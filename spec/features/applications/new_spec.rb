@@ -72,7 +72,7 @@ RSpec.describe "the applications show" do
         expect(page).to have_content("Applicant: #{new_app.name}")
         expect(page).to have_content("Address: #{new_app.street_address}, #{new_app.city}, #{new_app.state}, #{new_app.zip_code}")
         expect(page).to have_content("Description: #{new_app.description}")
-        expect(page).to have_content("Pets: ") # why does the string interpolation not work and return Pets: Pet
+        expect(page).to have_content("Pets:") # why does the string interpolation not work and return Pets: Pet
         expect(page).to have_content("Status: #{new_app.status}")
         expect(page).to have_content("Status: In Progress")
       end
