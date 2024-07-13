@@ -49,7 +49,6 @@ RSpec.describe "the applications show" do
         click_link "Start an Application"
 
         expect(page).to have_current_path("/applications/new")
-        end
       end
 
       it "will have a new application form for the user to fill out" do
