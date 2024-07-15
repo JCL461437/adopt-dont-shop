@@ -1,11 +1,31 @@
 <h1> Applicant: <%= @application.name %></h1>
-<h3> Address: <%= @application.street_address %>, <%= @application.city %>, <%= @application.state %>, <%= @application.zip_code %> </h3>
-<h3> Description: <%= @application.description %></h3>
-<h3> Pets:
+<p> Address: <%= @application.street_address %>, <%= @application.city %>, <%= @application.state %>, <%= @application.zip_code %> </p>
+<p> Description: <%= @application.description %></p>
+<p> Pets:
   <% @application.pets.each do |pet| %>
     <%= pet.name %>
   <% end %> 
 </h3>
-<h3> Status: <%= @application.status %></h3>
+<p> Status: <%= @application.status %></p>
+
+<div>
+<h2> Add a Pet to this Application </h2>
+  <%= form_with url: "/applications/#{@application.id}", method: :post, local: true do |form|%>
+    <h3> <%= form.label :pet_name %> </h3> 
+    <%= form.text_field :pet_name %>
+    <h4> <%= form.submit "Search for Pet" %> </h4>
+  <% end %>
+
+  <% if params[:name] %>
+    <% @pets.each do |pet| %>
+      <p> <%= pet.name %> </p>
+    <% end %>
+  <% end %>
+</div>
+
+
+
+
+
 
 
