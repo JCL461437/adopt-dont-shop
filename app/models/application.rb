@@ -4,4 +4,6 @@ class Application < ApplicationRecord
 
   validates :name, :street_address, :city, :state, :zip_code, :description, presence: true
 
+
+  # use this enum sytnax for future user story? enum :status, [:shipped, :being_packed, :complete, :cancelled]
 end
