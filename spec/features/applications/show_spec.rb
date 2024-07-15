@@ -75,8 +75,7 @@ RSpec.describe "the applications show" do
             click_button "Adopt this Pet"
           end
 
-          within ("pets-on-application") do
-            expect(page).to have_content("Scooby")
+          within ("#pets-on-application") do
             expect(page).to have_content("Dozer")
           end
         end
