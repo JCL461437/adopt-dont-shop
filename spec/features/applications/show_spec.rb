@@ -34,7 +34,7 @@ RSpec.describe "the applications show" do
 
   describe "As a visitor do" do
     describe "when I visit an applications show page" do 
-      it "will display " do
+      it "will display the applications attributes" do
         visit "/applications/#{@application1.id}"
 
         expect(page).to have_content("Applicant: #{@application1.name}")
@@ -42,6 +42,20 @@ RSpec.describe "the applications show" do
         expect(page).to have_content("Description: #{@application1.description}")
         expect(page).to have_content("Pets: Scooby") # why does the string interpolation not work and return Pets: Pet
         expect(page).to have_content("Status: #{@application1.status}")
+      end
+
+      describe "and it has not been submitted" do
+        it "will have a section on the page to add a pet to an application through a search bar" do
+          visit "/applications/#{@application1.id}"
+
+          expect(page).to have_content("Add a Pet to this Application")
+
+          fill_in "name", with: "Dozer"
+
+          click_button "Search for Pet"
+
+          expect(page).to have_content("Dozer")
+        end
       end
     end
   end
