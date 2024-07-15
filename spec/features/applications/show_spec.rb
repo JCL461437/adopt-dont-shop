@@ -71,7 +71,7 @@ RSpec.describe "the applications show" do
   
           expect(page).to have_content("Dozer")
 
-          within ("pet-#{@pet2.id}") do
+          within ("#pet-#{@pet2.id}") do
             click_button "Adopt this Pet"
           end
 
@@ -81,8 +81,6 @@ RSpec.describe "the applications show" do
           end
         end
       end
-
-      
       
     end
   end
