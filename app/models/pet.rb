@@ -13,7 +13,7 @@ class Pet < ApplicationRecord
     where(adoptable: true)
   end
 
-  def self.find_pet_by_name
-    find_by(name: params[:name])
+  def self.find_pet_by_name(name)
+    find_by(name: name)
   end
 end
