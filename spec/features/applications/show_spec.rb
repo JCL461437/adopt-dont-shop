@@ -56,7 +56,31 @@ RSpec.describe "the applications show" do
 
           expect(page).to have_content("Dozer")
         end
+        
+        it "will have a button next to each pet name to adopt that pet" do
+          visit "/applications/#{@application1.id}"
+  
+          expect(page).to have_content("Add a Pet to this Application")
+  
+          fill_in "name", with: "Dozer"
+  
+          click_button "Search for Pet"
+  
+          expect(page).to have_content("Dozer")
+
+          within ("#pet-#{@pet2.id}") do
+            click_button "Adopt this Pet"
+          end
+
+          within ("pet-on-application") do
+            expect(page).to have_content("Scooby")
+            expect(page).to have_content("Dozer")
+          end
+        end
       end
+
+      
+      
     end
   end
 end
