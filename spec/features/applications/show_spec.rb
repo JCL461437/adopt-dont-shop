@@ -50,7 +50,7 @@ RSpec.describe "the applications show" do
 
           expect(page).to have_content("Add a Pet to this Application")
 
-          fill_in "pet_name", with: "Dozer"
+          fill_in "name", with: "Dozer"
 
           click_button "Search for Pet"
 
