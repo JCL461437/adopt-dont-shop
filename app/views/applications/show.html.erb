@@ -1,14 +1,14 @@
 <h1> Applicant: <%= @application.name %></h1>
 <p> Address: <%= @application.street_address %>, <%= @application.city %>, <%= @application.state %>, <%= @application.zip_code %> </p>
 <p> Description: <%= @application.description %></p>
-<p> Pets:
-  <% @application.pets.each do |pet| %>
-    <div id="pet-on-application">
+<div id="pets-on-application">
+  <p> Pets:
+    <% @application.pets.each do |pet| %>
       <%= pet.name %>
       <br>
-    </div>  
-  <% end %> 
-</h3>
+    <% end %> 
+  </p>
+</div>  
 <p> Status: <%= @application.status %></p>
 
 <div>
