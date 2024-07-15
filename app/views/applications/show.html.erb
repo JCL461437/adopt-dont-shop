@@ -13,7 +13,7 @@
 
 
 <h2> Add a Pet to this Application </h2>
-<%= form_with url: "/applications/#{@application.id}", method: :get, local: true do |form|%>
+<%= form_with url: "/applications/#{@application.id}", method: :get, local: true do |form| %>
   <h3> <%= form.label :name %> </h3> 
   <%= form.text_field :name %>
   <h4> <%= form.submit "Search for Pet" %> </h4>
@@ -21,8 +21,8 @@
 
 <% if params[:name] %>
   <% @pets.each do |pet| %>
-    <div id="pet-<%=#{pet.id}%>">
-      <p> <%= pet.name %> <%= button_to "Adopt this Pet", "/applications/#{@application.id}", method: :post, params: {id: pet.id} %> </p>
+    <div id="pet-<%=pet.id%>">
+      <p> <%= pet.name %> <%= button_to "Adopt this Pet", "/applications/#{@application.id}"", method: :post, params: {id: pet.id} %> </p>
     </div>
   <% end %>
 <% end %>
