@@ -14,7 +14,7 @@ class ApplicationsController < ApplicationController
       redirect_to "/applications/#{application.id}"
     else 
       redirect_to "/applications/new"
-      flash[:alert] = "You must fill out all the fields for the Application Form. Try Again"
+      flash[:notice] = "You must fill out all the fields for the Application Form. Try Again"
     end
 
   end
