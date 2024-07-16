@@ -22,7 +22,7 @@
 <% if params[:name] %>
   <% @pets.each do |pet| %>
     <div id="pet-<%=pet.id%>">
-      <p> <%= pet.name %> <%= button_to "Adopt this Pet", "/applications/#{@application.id}"", method: :post, params: {id: pet.id} %> </p>
+      <p> <%= pet.name %> <%= button_to "Adopt this Pet", "/applications/#{@application.id}/pets", method: :post, params: {pet_id: pet.id } %> </p>
     </div>
   <% end %>
 <% end %>
