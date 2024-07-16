@@ -14,9 +14,19 @@ class ApplicationsController < ApplicationController
       redirect_to "/applications/#{application.id}"
     else 
       redirect_to "/applications/new"
-      flash[:alert] = "You must fill out all the fields for the Application Form. Try Again"
+      flash[:notice] = "You must fill out all the fields for the Application Form. Try Again"
     end
 
+  end
+
+  def edit
+
+  end
+
+  def update
+    application = Application.find(params[:id])
+    application.update({id: params[:id], name: params[:name], street_address: params[:street_address], city: params[:city], state: params[:state], zip_code: params[:zip_code], description: params[:description]})
+    redirect_to "/applications/#{application.id}"
   end
 
   private 

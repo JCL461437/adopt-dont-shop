@@ -30,18 +30,21 @@ RSpec.describe "the applications show" do
                                         description: "Dozer looks badass and I am a guy who wants a badass dog.", status: "Pending")
 
     @pet_application1 = PetApplication.create!(application: @application1, pet: @pet1)
+    @pet_application2 = PetApplication.create!(application: @application2, pet: @pet2)
   end
 
   describe "As a visitor do" do
     describe "when I visit an applications show page" do 
       it "will display the applications attributes" do
-        visit "/applications/#{@application1.id}"
+        visit "/applications/#{@application2.id}"
 
-        expect(page).to have_content("Applicant: #{@application1.name}")
-        expect(page).to have_content("Address: #{@application1.street_address}, #{@application1.city}, #{@application1.state}, #{@application1.zip_code}")
-        expect(page).to have_content("Description: #{@application1.description}")
-        expect(page).to have_content("Pets: Scooby") # why does the string interpolation not work and return Pets: Pet
-        expect(page).to have_content("Status: #{@application1.status}")
+        expect(page).to have_content("Applicant: #{@application2.name}")
+        expect(page).to have_content("Address: #{@application2.street_address}, #{@application2.city}, #{@application2.state}, #{@application2.zip_code}")
+        expect(page).to have_content("Description: #{@application2.description}")
+        within ("#pets-on-application") do
+          expect(page).to have_content("Dozer")
+        end # why does the string interpolation not work and return Pets: Pet
+        expect(page).to have_content("Status: #{@application2.status}")
       end
 
       describe "and it has not been submitted" do
@@ -56,7 +59,28 @@ RSpec.describe "the applications show" do
 
           expect(page).to have_content("Dozer")
         end
+        
+        it "will have a button next to each pet name to adopt that pet" do
+          visit "/applications/#{@application1.id}"
+  
+          expect(page).to have_content("Add a Pet to this Application")
+  
+          fill_in "name", with: "Dozer"
+  
+          click_button "Search for Pet"
+  
+          expect(page).to have_content("Dozer")
+
+          within ("#pet-#{@pet2.id}") do
+            click_button "Adopt this Pet"
+          end
+
+          within ("#pets-on-application") do
+            expect(page).to have_content("Dozer")
+          end
+        end
       end
+      
     end
   end
 end
