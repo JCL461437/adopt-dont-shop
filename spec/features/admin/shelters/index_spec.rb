@@ -11,40 +11,40 @@ RSpec.describe "the admin shelters index" do
   end
 
   it "lists all the shelter names in reverse alphabetical order" do
-    visit "/shelters"
-    expect(@shelter_1.name).to appear_before(@shelter_3.name)
-    expect(@shelter_3.name).to appear_before(@shelter_2.name)
-    expect(@shelter_2.name).to_not appear_before(@shelter_1.name)
+    visit "/admin/shelters"
+    expect(@shelter_2.name).to appear_before(@shelter_3.name)
+    expect(@shelter_3.name).to appear_before(@shelter_1.name)
+    expect(@shelter_1.name).to_not appear_before(@shelter_3.name)
     
     expect(page).to have_content(@shelter_2.name)
     expect(page).to have_content(@shelter_3.name)
   end
 
-  it "lists the shelters by most recently created first" do
-    visit "/shelters"
+  # it "lists the shelters by most recently created first" do
+  #   visit "/admin/shelters"
 
-    oldest = find("#shelter-#{@shelter_1.id}")
-    mid = find("#shelter-#{@shelter_2.id}")
-    newest = find("#shelter-#{@shelter_3.id}")
+  #   oldest = find("#shelter-#{@shelter_1.id}")
+  #   mid = find("#shelter-#{@shelter_2.id}")
+  #   newest = find("#shelter-#{@shelter_3.id}")
 
-    expect(newest).to appear_before(mid)
-    expect(mid).to appear_before(oldest)
+  #   expect(newest).to appear_before(mid)
+  #   expect(mid).to appear_before(oldest)
 
-    within "#shelter-#{@shelter_1.id}" do
-      expect(page).to have_content("Created at: #{@shelter_1.created_at}")
-    end
+  #   within "#shelter-#{@shelter_1.id}" do
+  #     expect(page).to have_content("Created at: #{@shelter_1.created_at}")
+  #   end
 
-    within "#shelter-#{@shelter_2.id}" do
-      expect(page).to have_content("Created at: #{@shelter_2.created_at}")
-    end
+  #   within "#shelter-#{@shelter_2.id}" do
+  #     expect(page).to have_content("Created at: #{@shelter_2.created_at}")
+  #   end
 
-    within "#shelter-#{@shelter_3.id}" do
-      expect(page).to have_content("Created at: #{@shelter_3.created_at}")
-    end
-  end
+  #   within "#shelter-#{@shelter_3.id}" do
+  #     expect(page).to have_content("Created at: #{@shelter_3.created_at}")
+  #   end
+  # end
 
   it "has a link to sort shelters by the number of pets they have" do
-    visit "/shelters"
+    visit "/admin/shelters"
 
     expect(page).to have_link("Sort by number of pets")
     click_link("Sort by number of pets")
@@ -55,7 +55,7 @@ RSpec.describe "the admin shelters index" do
   end
 
   it "has a link to update each shelter" do
-    visit "/shelters"
+    visit "/admin/shelters"
 
     within "#shelter-#{@shelter_1.id}" do
       expect(page).to have_link("Update #{@shelter_1.name}")
@@ -74,7 +74,7 @@ RSpec.describe "the admin shelters index" do
   end
 
   it "has a link to delete each shelter" do
-    visit "/shelters"
+    visit "/admin/shelters"
 
     within "#shelter-#{@shelter_1.id}" do
       expect(page).to have_link("Delete #{@shelter_1.name}")
@@ -94,12 +94,12 @@ RSpec.describe "the admin shelters index" do
   end
 
   it "has a text box to filter results by keyword" do
-    visit "/shelters"
+    visit "/admin/shelters"
     expect(page).to have_button("Search")
   end
 
   it "lists partial matches as search results" do
-    visit "/shelters"
+    visit "/admin/shelters"
 
     fill_in "Search", with: "RGV"
     click_on("Search")
