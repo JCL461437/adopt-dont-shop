@@ -11,7 +11,7 @@
 </div>  
 <p> Status: <%= @application.status %></p>
 
-<% if @application.status == "In Progress" %>
+<% if @application.status == "Pending" %>
   <div id="add-pet-section">
     <h2> Add a Pet to this Application </h2>
     <%= form_with url: "/applications/#{@application.id}", method: :get, local: true do |form| %>
@@ -35,7 +35,8 @@
       <%= form_with url: "/applications/#{@application.id}", method: :patch, params: {id: @application.id, status: "Pending"}, local: true do |form| %>
       <%= form.label :description %>
       <%= form.text_field :description %>
-      <%= form.submit "Submit Application" %>
+      <% if @application.pets.count != 0 %>
+        <%= form.submit "Submit Application" %>
       <% end %>
     <% end %>
   </div>
