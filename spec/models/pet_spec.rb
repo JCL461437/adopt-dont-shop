@@ -36,6 +36,8 @@ RSpec.describe Pet, type: :model do
     describe "#self_find_by_name" do
       it "returns the pet that matches the name" do
         expect(Pet.find_pet_by_name("Mr. Pirate")).to eq([@pet_1])
+        expect(Pet.find_pet_by_name("Pirate")).to eq([@pet_1])
+        expect(Pet.find_pet_by_name("Mr.")).to eq([@pet_1])
       end
     end
   end
