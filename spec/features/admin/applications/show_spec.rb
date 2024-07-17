@@ -22,19 +22,43 @@ RSpec.describe "the applications show" do
 
     @pet_application1 = PetApplication.create!(application: @application1, pet: @pet1)
     @pet_application2 = PetApplication.create!(application: @application2, pet: @pet2)
-    @pet_application3 = PetApplication.create!(application: @application2, pet: @pet2)
+    @pet_application3 = PetApplication.create!(application: @application2, pet: @pet4)
   end
 
   describe "As a visitor do" do
-    describe "when I visit an applications show page" do 
-      it "will display the applications attributes" do
-        visit "/applications/#{@application2.id}"
+    describe "when I visit an admin applications show page" do 
+      it "will display the pets that correspond to this application with buttons to accept or reject the pet that dissapear after the pet has been rejected" do
+        visit "admin/applications/#{@application2.id}"
 
-        expect(page).to have_content("Applicant: #{@application2.name}")
-        expect(page).to have_content("Address: #{@application2.street_address}, #{@application2.city}, #{@application2.state}, #{@application2.zip_code}")
-        expect(page).to have_content("Description: #{@application2.description}")
-        within ("#pets-on-application") do
-          expect(page).to have_content("Dozer")
-        end # why does the string interpolation not work and return Pets: Pet
-        expect(page).to have_content("Status: #{@application2.status}")
+        expect(page).to have_content("Admin #{@application2.id} Show Page")
+
+        within ("#pet-application-#{@pet_application3.id}#{@pet2.id}") do
+          expect(page).to have_content("#{@pet2.name}")
+          expect(page).to have_content("Accept Pet")
+          expect(page).to have_content("Reject Pet")
+
+          click_button "Accept Pet"
+
+          expect(page).to_not have_content("Accept Pet")
+          expect(page).to_not have_content("Reject Pet")
+
+          expect(page).to have_content("#{@pet_application3.status}")
+        end 
+
+        within ("#pet-application-#{@pet_application3.id}#{@pet4.id}")
+          expect(page).to have_content("#{@pet4.name}")
+          expect(page).to have_content("Accept Pet")
+          expect(page).to have_content("Reject Pet")
+
+          click_button "Reject Pet"
+
+          expect(page).to_not have_content("Accept Pet")
+          expect(page).to_not have_content("Reject Pet")
+
+          expect(page).to have_content("#{@pet_application3.status}")
+        end
+        
       end
+    end
+  end
+end
