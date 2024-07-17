@@ -36,7 +36,7 @@ RSpec.describe PetApplication, type: :model do
   describe "class methods" do
     describe "#associated_application" do
       it "returns applications associated with with pet applications" do
-        expect(PetApplication.associated_applications(@application1)).to eq([@pet_application1, @pet_application4])
+        expect(PetApplication.associated_applications(@application1.id)).to eq([@pet_application1, @pet_application4])
       end
     end
   end

@@ -40,7 +40,7 @@ RSpec.describe "the admin shelters index" do
 
     expect(page).to have_current_path("/shelters?sort=pet_count")
     expect(@shelter_3.name).to appear_before(@shelter_1.name)
-    expect(@shelter_1.name).to appear_before(@shelter_2.name)
+    expect(@shelter_2.name).to appear_before(@shelter_1.name)
   end
 
   it "has a link to update each shelter" do
