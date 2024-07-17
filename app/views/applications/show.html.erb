@@ -27,8 +27,16 @@
   <% end %>
 <% end %>
 
-
-
+<div id="submit-application">
+  <% if @application.pets > 0 && @application.status == "In Progress" %>
+    <h3> Why I would make a good owner: </h3>
+    <%= form_with url: "/applications/#{@application.id}", method: :patch, params: {id: @application.id, status: "Pending"}, local: true do |form| %>
+    <%= form.label :description %>
+    <%= form.text_field :description %>
+    <br>
+    <% end %>
+  <% end %>
+</div>
 
 
 
