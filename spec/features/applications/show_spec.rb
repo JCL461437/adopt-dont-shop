@@ -25,9 +25,9 @@ RSpec.describe "the applications show" do
     @pet4 = Pet.create!(name: "Carl", age: 7, breed: "Goat", adoptable: false, shelter_id: @shelter4.id)
 
     @application1 = Application.create!(name: "Joe Baeza", street_address: "12345 Joe Street", city: "Irvine", state: "CA", zip_code: "54321",
-                                        description: "I like Scooby and Carl so I want to adopt them", status: "Pending")
+                                        description: "I like Scooby and Carl so I want to adopt them", status: "In Progress")
     @application2 = Application.create!(name: "Billy Bob", street_address: "56789 The Bob Street", city: "Boulder", state: "CO", zip_code: "09876",
-                                        description: "Dozer looks badass and I am a guy who wants a badass dog.", status: "Pending")
+                                        description: "Dozer looks badass and I am a guy who wants a badass dog.", status: "In Progress")
 
     @pet_application1 = PetApplication.create!(application: @application1, pet: @pet1)
     @pet_application2 = PetApplication.create!(application: @application2, pet: @pet2)
