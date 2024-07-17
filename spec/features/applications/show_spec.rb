@@ -79,8 +79,31 @@ RSpec.describe "the applications show" do
             expect(page).to have_content("Dozer")
           end
         end
+
+        it "once I have added on or more pets I can submit the application and describe why I would be a good owner " do
+          visit "/applications/#{@application1.id}"
+
+          fill_in "name", with: "Dozer"
+  
+          click_button "Search for Pet"
+  
+          expect(page).to have_content("Dozer")
+
+          within ("#pet-#{@pet2.id}") do
+            click_button "Adopt this Pet"
+          end
+
+          within ("#pets-on-application") do
+            expect(page).to have_content("Dozer")
+          end
+          
+          within ("#submit-application") do
+            expect(page).to have_content("Why I would make a good owner:")
+            fill_in 'description', with: 'I want a pet man.'
+            click_button "Submit Application"
+          end
+        end
       end
-      
     end
   end
 end
