@@ -1,7 +1,7 @@
 class ApplicationsController < ApplicationController
   def show
     @application = Application.find(params[:id]) 
-    @pets = Pet.find_pet_by_name(params[:name])
+    @pets = Pet.find_pet_by_name(params[:name].downcase) if params[:name].present?
   end
 
   def new
