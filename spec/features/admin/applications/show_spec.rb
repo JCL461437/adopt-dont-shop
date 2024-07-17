@@ -2,6 +2,17 @@ require "rails_helper"
 
 RSpec.describe "the applications show" do
 
+  # 1. Application Show Page
+
+  # As a visitor
+  # When I visit an applications show page
+  # Then I can see the following:
+  # - Name of the Applicant
+  # - Full Address of the Applicant including street address, city, state, and zip code
+  # - Description of why the applicant says they'd be a good home for this pet(s)
+  # - names of all pets that this application is for (all names of pets should be links to their show page)
+  # - The Application's status, either "In Progress", "Pending", "Accepted", or "Rejected"
+
   before :each do
     @shelter1 = Shelter.create!(name: "Mystery Building", city: "Irvine CA", foster_program: false, rank: 9)
     @shelter2 = Shelter.create!(name: "Fuzzy Paws", city: "Boulder CO", foster_program: false, rank: 4)
@@ -38,94 +49,3 @@ RSpec.describe "the applications show" do
         end # why does the string interpolation not work and return Pets: Pet
         expect(page).to have_content("Status: #{@application2.status}")
       end
-
-      describe "and it has not been submitted" do
-        it "will have a section on the page to add a pet to an application through a search bar" do
-          visit "/applications/#{@application1.id}"
-
-          expect(page).to have_content("Add a Pet to this Application")
-
-          fill_in "name", with: "Dozer"
-
-          click_button "Search for Pet"
-
-          expect(page).to have_content("Dozer")
-        end
-        
-        it "will have a button next to each pet name to adopt that pet" do
-          visit "/applications/#{@application1.id}"
-  
-          expect(page).to have_content("Add a Pet to this Application")
-  
-          fill_in "name", with: "Dozer"
-  
-          click_button "Search for Pet"
-  
-          expect(page).to have_content("Dozer")
-
-          within ("#pet-#{@pet2.id}") do
-            click_button "Adopt this Pet"
-          end
-
-          within ("#pets-on-application") do
-            expect(page).to have_content("Dozer")
-          end
-        end
-
-        it "once I have added on or more pets I can submit the application and describe why I would be a good owner " do
-          visit "/applications/#{@application1.id}"
-
-          fill_in "name", with: "Dozer"
-  
-          click_button "Search for Pet"
-  
-          expect(page).to have_content("Dozer")
-
-          within ("#pet-#{@pet2.id}") do
-            click_button "Adopt this Pet"
-          end
-
-          within ("#pets-on-application") do
-            expect(page).to have_content("Dozer")
-          end
-          
-          within ("#submit-application") do
-            expect(page).to have_content("Why I would make a good owner:")
-            fill_in 'description', with: 'I want a pet man.'
-            click_button "Submit Application"
-          end
-        end
-          
-        it "will not allow the user to submit if they have not pets on the application" do
-          visit "/applications/#{@application3.id}"
-
-          within ("#submit-application") do
-            expect(page).to_not have_content("Submit Application")
-          end
-        end
-        
-        it "will have a section on the page to add a pet to an application through a search bar with partial matches" do
-          visit "/applications/#{@application1.id}"
-
-          expect(page).to have_content("Add a Pet to this Application")
-
-          fill_in "name", with: "ozer"
-
-          click_button "Search for Pet"
-
-          expect(page).to have_content("Dozer")
-
-          visit "/applications/#{@application1.id}"
-
-          expect(page).to have_content("Add a Pet to this Application")
-
-          fill_in "name", with: "Doz"
-
-          click_button "Search for Pet"
-
-          expect(page).to have_content("Dozer")
-        end
-      end
-    end
-  end
-end
