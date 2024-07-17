@@ -39,6 +39,12 @@ RSpec.describe Pet, type: :model do
         expect(Pet.find_pet_by_name("Pirate")).to eq([@pet_1])
         expect(Pet.find_pet_by_name("Mr.")).to eq([@pet_1])
       end
+
+      it 'returns the pet that matches the name case-insensitive' do
+        expect(Pet.find_pet_by_name('mr. pirate')).to eq([@pet_1])
+        expect(Pet.find_pet_by_name('MR. PIRATE')).to eq([@pet_1])
+        expect(Pet.find_pet_by_name('Mr. pirate')).to eq([@pet_1])
+      end
     end
   end
 
