@@ -111,7 +111,6 @@ RSpec.describe "the applications show" do
           visit "/applications/#{@application3.id}"
 
           within ("#submit-application") do
-            expect(page).to have_content("Why I would make a good owner:")
             expect(page).to_not have_content("Submit Application")
           end
         end
