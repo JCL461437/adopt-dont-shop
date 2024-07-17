@@ -61,7 +61,7 @@ RSpec.describe Shelter, type: :model do
 
     describe "#shelters_pending_applications" do
       it "returns all shelters with pending applications" do
-        expect(Shelter.shelters_pending_applications).to eq([@shelter2, @shelter3])
+        expect(Shelter.shelters_pending_applications).to eq([@shelter_1, @shelter_3])
       end
     end
   end
