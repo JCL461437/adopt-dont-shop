@@ -15,6 +15,7 @@ class Pet < ApplicationRecord
 
   def self.find_pet_by_name(name)
     #where(name: name)
-    where("name LIKE ?", "%#{name}%") #stack overflow syntax with %?
+    insensitive_name = where("name LIKE ?", "%#{name}%") #stack overflow syntax with %?
+    insensitive_name.pluck
   end
 end
