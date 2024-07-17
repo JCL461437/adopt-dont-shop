@@ -57,8 +57,7 @@ RSpec.describe "the applications show" do
 
           expect(page).to have_content("#{@pet_application3.status}")
         end
-        
+
       end
     end
   end
-end
