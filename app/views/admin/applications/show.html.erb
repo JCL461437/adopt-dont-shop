@@ -5,8 +5,8 @@
     <div id="pet-application-<%=pet_application.id%><%=pet_application.pet.id%>">
       <p> <%= pet_application.pet.name %> </p>
       <% if pet_application.status == "Pending"
-        <p> <%= pet.name %> <%= button_to "Accept Pet", "/admin/applications/#{@application.id}/pets", method: :post, params: {status: "Accepted" pet_application_id: pet_application.id } %> </p>
-        <p> <%= pet.name %> <%= button_to "Reject Pet", "/admin/applications/#{@application.id}/pets", method: :post, params: {status: "Rejected" pet_application_id: pet_application.id } %> </p>
+        <p> <%= pet.name %> <%= button_to "Accept Pet", "/admin/applications/#{@application.id}/pets", method: :patch, params: {status: "Accepted" pet_application_id: pet_application.id } %> </p>
+        <p> <%= pet.name %> <%= button_to "Reject Pet", "/admin/applications/#{@application.id}/pets", method: :patch, params: {status: "Rejected" pet_application_id: pet_application.id } %> </p>
       <% else %>
         <%= pet_application.status %> 
       <% end %> 
