@@ -25,12 +25,15 @@ RSpec.describe "the applications show" do
     @pet4 = Pet.create!(name: "Carl", age: 7, breed: "Goat", adoptable: false, shelter_id: @shelter4.id)
 
     @application1 = Application.create!(name: "Joe Baeza", street_address: "12345 Joe Street", city: "Irvine", state: "CA", zip_code: "54321",
-                                        description: "I like Scooby and Carl so I want to adopt them", status: "In Progress")
+                                        description: "I like Scooby and Carl so I want to adopt them", status: "Pending")
     @application2 = Application.create!(name: "Billy Bob", street_address: "56789 The Bob Street", city: "Boulder", state: "CO", zip_code: "09876",
-                                        description: "Dozer looks badass and I am a guy who wants a badass dog.", status: "In Progress")
+                                        description: "Dozer looks badass and I am a guy who wants a badass dog.", status: "Pending")
+    @application3 = Application.create!(name: "The Guy", street_address: "111111 The Guy Avenue", city: "Seattle", state: "WA", zip_code: "29212",
+                                        description: "I am the guy. The guy deserves a pet, don't you think?", status: "Pending")
 
     @pet_application1 = PetApplication.create!(application: @application1, pet: @pet1)
     @pet_application2 = PetApplication.create!(application: @application2, pet: @pet2)
+    @pet_application3 = PetApplication.create!(application: @application2, pet: @pet2)
   end
 
   describe "As a visitor do" do
@@ -102,29 +105,14 @@ RSpec.describe "the applications show" do
             fill_in 'description', with: 'I want a pet man.'
             click_button "Submit Application"
           end
+        end
+          
+        it "will not allow the user to submit if they have not pets on the application" do
+          visit "/applications/#{@application3.id}"
 
-          it "once I have added on or more pets I can submit the application and describe why I would be a good owner " do
-            visit "/applications/#{@application1.id}"
-  
-            fill_in "name", with: "Dozer"
-    
-            click_button "Search for Pet"
-    
-            expect(page).to have_content("Dozer")
-  
-            within ("#pet-#{@pet2.id}") do
-              click_button "Adopt this Pet"
-            end
-  
-            within ("#pets-on-application") do
-              expect(page).to have_content("Dozer")
-            end
-            
-            within ("#submit-application") do
-              expect(page).to have_content("Why I would make a good owner:")
-              fill_in 'description', with: 'I want a pet man.'
-              click_button "Submit Application"
-            end
+          within ("#submit-application") do
+            expect(page).to_not have_content("Submit Application")
+          end
         end
       end
     end

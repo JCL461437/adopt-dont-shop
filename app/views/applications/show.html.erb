@@ -33,10 +33,11 @@
     <% if @application.pets.count > 0 %>
       <h3> Why I would make a good owner: </h3>
       <%= form_with url: "/applications/#{@application.id}", method: :patch, params: {id: @application.id, status: "Pending"}, local: true do |form| %>
-      <%= form.label :description %>
-      <%= form.text_field :description %>
-      <% if @application.pets.count != 0 %>
-        <%= form.submit "Submit Application" %>
+        <%= form.label :description %>
+        <%= form.text_field :description %>
+        <% if @application.pets.count != 0 %>
+          <%= form.submit "Submit Application" %>
+        <% end %>
       <% end %>
     <% end %>
   </div>
