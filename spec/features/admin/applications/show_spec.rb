@@ -32,7 +32,7 @@ RSpec.describe "the applications show" do
 
         expect(page).to have_content("Admin #{@application2.id} Show Page")
 
-        within ("#pet-application-#{@pet_application3.id}-#{@pet2.id}") do
+        within ("#pet-application-#{@pet_application3.id}") do
           expect(page).to have_content("#{@pet2.name}")
           expect(page).to have_content("Accept Pet")
           expect(page).to have_content("Reject Pet")
@@ -45,7 +45,7 @@ RSpec.describe "the applications show" do
           expect(page).to have_content("#{@pet_application3.status}")
         end 
 
-        within ("#pet-application-#{@pet_application3.id}-#{@pet4.id}")
+        within ("#pet-application-#{@pet_application3.id}")
           expect(page).to have_content("#{@pet4.name}")
           expect(page).to have_content("Accept Pet")
           expect(page).to have_content("Reject Pet")
