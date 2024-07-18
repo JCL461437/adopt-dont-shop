@@ -1,4 +1,5 @@
-<h1> Admin <%= @application.id %> Show Page </h1>
+<%= render partial: 'admin/view_label', locals: {view_type: "Admin"} %>
+<h1> <%= @application.id %> Show Page </h1>
 
 <div id="enable-disable-application">
   <% @application.pet_applications.each do |pet_application| %>
