@@ -22,6 +22,11 @@ RSpec.describe "the admin shelters index" do
     @pet_application3 = PetApplication.create!(application: @application3, pet: @pet_3)
   end
 
+  it "displays the sort of view to the user" do
+    visit "/admin/shelters"
+    expect(page).to have_content("This is the Admin view")
+  end
+
   it "lists all the shelter names in reverse alphabetical order" do
     visit "/admin/shelters"
     expect(@shelter_2.name).to appear_before(@shelter_3.name)

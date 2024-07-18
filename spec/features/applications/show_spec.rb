@@ -27,6 +27,11 @@ RSpec.describe "the applications show" do
 
   describe "As a visitor do" do
     describe "when I visit an applications show page" do 
+      it "displays the sort of view to the user" do
+        visit "/applications/#{@application1.id}"
+        expect(page).to have_content("This is the User view")
+      end
+
       it "will display the applications attributes" do
         visit "/applications/#{@application2.id}"
 

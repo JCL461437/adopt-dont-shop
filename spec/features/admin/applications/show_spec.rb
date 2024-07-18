@@ -27,10 +27,15 @@ RSpec.describe "the applications show" do
 
   describe "As a visitor do" do
     describe "when I visit an admin applications show page" do 
+      it "displays the sort of view to the user" do
+        visit "/admin/applications/#{@application2.id}"
+        expect(page).to have_content("This is the Admin view")
+      end
+
       it "will display the pets that correspond to this application with buttons to accept or reject the pet that dissapear after the pet has been rejected" do
         visit "admin/applications/#{@application2.id}"
 
-        expect(page).to have_content("Admin #{@application2.id} Show Page")
+        expect(page).to have_content("#{@application2.id} Show Page")
 
         within ("#pet-application-#{@pet_application2.id}-#{@pet_application2.pet.id}") do
           expect(page).to have_content("#{@pet2.name}")
