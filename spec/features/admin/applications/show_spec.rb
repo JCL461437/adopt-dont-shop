@@ -41,7 +41,7 @@ RSpec.describe "the applications show" do
 
           expect(page).to_not have_content("Accept Pet")
           expect(page).to_not have_content("Reject Pet")
-          save_and_open_page
+
           expect(page).to have_content("#{@pet_application2.pet.name} Accepted")
         end 
 

@@ -21,8 +21,7 @@
                                     description: "I'll go for Mr. Pirate since that name sounds sick.", status: "Pending")
 @application3 = Application.create!(name: "The Guy", street_address: "111111 The Guy Avenue", city: "Seattle", state: "WA", zip_code: "29212",
                                     description: "Lucille Bald looks like a sphynx and I think I am a sphynx kind of guy.", status: "Pending")
-@pet_application1 = PetApplication.create!(application: @application1, pet: @pet_2)
+@pet_application1 = PetApplication.create!(application: @application1, pet: @pet_1)
 @pet_application2 = PetApplication.create!(application: @application2, pet: @pet_1)
 @pet_application3 = PetApplication.create!(application: @application3, pet: @pet_3)
-@pet_application4 = PetApplication.create!(application: @application1, pet: @pet_4)
-@pet_application5 = PetApplication.create!(application: @application2, pet: @pet_2)
+@pet_application4 = PetApplication.create!(application: @application1, pet: @pet_1)
