@@ -6,7 +6,6 @@ class Admin::ApplicationsController < ApplicationsController
   end
 
   def update 
-    binding.pry
     @application = Application.find(params[:id])
     @pet_application = @application.pet_applications.find_by(params[:pet_id])
     if @pet_application.update(pet_app_status: params[:pet_app_status])
