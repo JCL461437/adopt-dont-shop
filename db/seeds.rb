@@ -25,3 +25,4 @@
 @pet_application2 = PetApplication.create!(application: @application2, pet: @pet_1)
 @pet_application3 = PetApplication.create!(application: @application3, pet: @pet_3)
 @pet_application4 = PetApplication.create!(application: @application1, pet: @pet_4)
+@pet_application5 = PetApplication.create!(application: @application2, pet: @pet_2)
