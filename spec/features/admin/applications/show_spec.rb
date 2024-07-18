@@ -41,8 +41,8 @@ RSpec.describe "the applications show" do
 
           expect(page).to_not have_content("Accept Pet")
           expect(page).to_not have_content("Reject Pet")
-
-          expect(page).to have_content("#{@pet_application3.status}")
+          save_and_open_page
+          expect(page).to have_content("#{@pet_application2.pet.name} Accepted")
         end 
 
         within ("#pet-application-#{@pet_application3.id}-#{@pet_application3.pet.id}")
@@ -55,7 +55,7 @@ RSpec.describe "the applications show" do
           expect(page).to_not have_content("Accept Pet")
           expect(page).to_not have_content("Reject Pet")
 
-          expect(page).to have_content("#{@pet_application3.status}")
+          expect(page).to have_content("#{@pet_application3.pet.name} Rejected")
         end
 
       end
