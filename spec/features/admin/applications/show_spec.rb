@@ -20,8 +20,8 @@ RSpec.describe "the applications show" do
     @application3 = Application.create!(name: "The Guy", street_address: "111111 The Guy Avenue", city: "Seattle", state: "WA", zip_code: "29212",
                                         description: "I am the guy. The guy deserves a pet, don't you think?", status: "In Progress")
 
-    @pet_application1 = PetApplication.create!(application: @application1, pet: @pet1)
-    @pet_application2 = PetApplication.create!(application: @application2, pet: @pet2)
+    @pet_application1 = PetApplication.create!(application: @application1, pet: @pet1, pet_app_status: "Pending")
+    @pet_application2 = PetApplication.create!(application: @application2, pet: @pet2, pet_app_status: "Pending")
     @pet_application3 = PetApplication.create!(application: @application2, pet: @pet4)
   end
 
@@ -32,7 +32,7 @@ RSpec.describe "the applications show" do
 
         expect(page).to have_content("Admin #{@application2.id} Show Page")
 
-        within ("#pet-application-#{@pet_application3.id}") do
+        within ("#pet-application-#{@pet_application2.id}-#{@pet_application2.pet.id}") do
           expect(page).to have_content("#{@pet2.name}")
           expect(page).to have_content("Accept Pet")
           expect(page).to have_content("Reject Pet")
@@ -45,7 +45,7 @@ RSpec.describe "the applications show" do
           expect(page).to have_content("#{@pet_application3.status}")
         end 
 
-        within ("#pet-application-#{@pet_application3.id}")
+        within ("#pet-application-#{@pet_application3.id}-#{@pet_application3.pet.id}")
           expect(page).to have_content("#{@pet4.name}")
           expect(page).to have_content("Accept Pet")
           expect(page).to have_content("Reject Pet")
